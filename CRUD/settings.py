@@ -1,16 +1,33 @@
 import os
 
+from django.core.exceptions import ImproperlyConfigured
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _require_env(name: str) -> str:
+    """Return a required environment variable without substituting a secret."""
+    value = os.environ.get(name)
+    if value is None or value == '':
+        raise ImproperlyConfigured(
+            f'{name} environment variable is required and must not be empty.'
+        )
+    return value
 
 
 # Quick-start development settings - unsuitable for production
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$lwl9^6uhcq+(g-uomuzr!597^8_)8*m#=t!p3rm_y+7p^1vfx'
+SECRET_KEY = _require_env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True').strip().lower() in {
+    '1',
+    'true',
+    'yes',
+    'on',
+}
 
 ALLOWED_HOSTS = []
 
@@ -67,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mydb',
         'USER': 'marco',
-        'PASSWORD': '123456789',
+        'PASSWORD': _require_env('DB_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -124,5 +141,5 @@ LOGOUT_REDIRECT_URL = 'home'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'seuemailaqui@gmail.com'
-EMAIL_HOST_PASSWORD = 'senhadoemailaqui'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = True

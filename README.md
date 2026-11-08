@@ -21,30 +21,14 @@ execute os comandos:
 4.4 - 'GRANT ALL ON db_mysite.* TO 'nome_do_usuario'@'localhost';'   
 4.5 - 'FLUSH PRIVILEGES;   
 5. Execute o comando 'pip install requirements-dev.txt' para instalar o necessário para rodar a aplicação   
-6. Abra a pasta CRUD, abra o código 'settings.py', atualize as configurações do banco de dados:    
-DATABASES = {   
-    'default': {   
-        'ENGINE': 'django.db.backends.mysql',   
-        'NAME': 'db_mysite',   
-        'USER': 'nome_do_usuario',   
-        'PASSWORD': 'senha',   
-        'HOST': 'localhost',   
-        'PORT': '3306',   
-    }   
-}   
+6. Copie `.env.example` para `.env` (não commite esse arquivo) e exporte as variáveis no ambiente do processo. `DJANGO_SECRET_KEY` e `DB_PASSWORD` são obrigatórias. `EMAIL_HOST_PASSWORD` só é necessária para envio de email. `DJANGO_DEBUG` é opcional. O arquivo `CRUD/settings.py` lê esses valores do ambiente. Se o nome do banco, o usuário, o host ou a porta forem diferentes, atualize somente esses campos em `settings.py`.   
 7. Execute o comando 'python manage.py makemigrations' para realizar as operaões do banco de dados   
 8. Execute o comando 'python manage.py migrate' para realizar a criação das tabelas no banco de dados   
 9. Execute o comando 'python manage.py createsuperuser' para criar um super usuario   
 10. Execute o comando 'python manage.py runserver' para rodar o servidor   
 
 **OBS1:** Certifique-se de que o computador tenha o python, o pip e o MySQL instalado corretamente   
-**OBS2:** Para um melhor aproveitamento da aplicação, em settings.py, coloque seu email (gmail) e a senha do email nas variaveis  'EMAIL_HOST_USER' e 'EMAIL_HOST_PASSWORD':   
-EMAIL_HOST = 'smtp.gmail.com'   
-EMAIL_PORT = 587   
-EMAIL_HOST_USER = 'seuemailaqui@gmail.com'   
-EMAIL_HOST_PASSWORD = 'senhadoemailaqui'   
-EMAIL_USE_TLS = True   
-Dessa forma, ao utilizar o comando 'Esqueci minha senha' da aplicação, chegará um link no email para poder resetá-la   
+**OBS2:** Para recuperação de senha por email, defina a variável de ambiente `EMAIL_HOST_PASSWORD` e ajuste `EMAIL_HOST_USER` em `settings.py` com o endereço remetente. Não grave a senha no código. Dessa forma, ao utilizar o comando 'Esqueci minha senha' da aplicação, chegará um link no email para poder resetá-la.   
 
 ## Para configurar a aplicação no linux\Mac Os:   
 1. Abra o terminal e va para o diretorio da aplicação   
@@ -59,27 +43,11 @@ execute os comandos:
 4.4 - 'GRANT ALL ON db_mysite.* TO 'nome_do_usuario'@'localhost';'   
 4.5 - 'FLUSH PRIVILEGES;   
 5. Execute o comando 'pip install requirements-dev.txt' para instalar o necessário para rodar a aplicação   
-6. Abra a pasta CRUD, abra o código 'settings.py', atualize as configurações do banco de dados:   
-DATABASES = {   
-    'default': {   
-        'ENGINE': 'django.db.backends.mysql',   
-        'NAME': 'db_mysite',   
-        'USER': 'nome_do_usuario',   
-        'PASSWORD': 'senha',   
-        'HOST': 'localhost',   
-        'PORT': '3306',    
-    }   
-}   
+6. Copie `.env.example` para `.env` (não commite esse arquivo) e exporte as variáveis no ambiente do processo. `DJANGO_SECRET_KEY` e `DB_PASSWORD` são obrigatórias. `EMAIL_HOST_PASSWORD` só é necessária para envio de email. `DJANGO_DEBUG` é opcional. O arquivo `CRUD/settings.py` lê esses valores do ambiente. Se o nome do banco, o usuário, o host ou a porta forem diferentes, atualize somente esses campos em `settings.py`.   
 7. Execute o comando 'python manage.py makemigrations' para realizar as operaões do banco de dados   
 8. Execute o comando 'python manage.py migrate' para realizar a criação das tabelas no banco de dados   
 9. Execute o comando 'python manage.py createsuperuser' para criar um super usuario   
 10. Execute o comando 'python manage.py runserver' para rodar o servidor   
   
 **OBS1:** Certifique-se de que o computador tenha o python, o pip e o MySQL instalado corretamente   
-**OBS2:** Para um melhor aproveitamento da aplicação, em settings.py, coloque seu email e a senha do email nas variaveis 'EMAIL_HOST_USER' e  'EMAIL_HOST_PASSWORD':   
-EMAIL_HOST = 'smtp.gmail.com'   
-EMAIL_PORT = 587   
-EMAIL_HOST_USER = 'seuemailaqui@gmail.com'   
-EMAIL_HOST_PASSWORD = 'senhadoemailaqui'   
-EMAIL_USE_TLS = True   
-Dessa forma, ao utilizar o comando 'Esqueci minha senha' da aplicação, chegará um link no email para poder resetá-la.   
+**OBS2:** Para recuperação de senha por email, defina a variável de ambiente `EMAIL_HOST_PASSWORD` e ajuste `EMAIL_HOST_USER` em `settings.py` com o endereço remetente. Não grave a senha no código. Dessa forma, ao utilizar o comando 'Esqueci minha senha' da aplicação, chegará um link no email para poder resetá-la.   
