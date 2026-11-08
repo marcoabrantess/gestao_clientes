@@ -1,0 +1,8 @@
+# Local environment files. Commit .env.example only.
+.env
+.env.*
+!.env.example
+
+# Bytecode can embed secrets loaded from settings.
+__pycache__/
+*.py[cod]
